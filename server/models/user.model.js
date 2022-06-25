@@ -22,7 +22,7 @@ const UserSchema = new mongoose.Schema(
 			required: [true, "Password is required"],
 			minlength: [8, "Password must be 8 characters or longer"]
 		},
-		post: {
+		post: [{
 			type: String,
 			title: {
 				type: String
@@ -30,7 +30,7 @@ const UserSchema = new mongoose.Schema(
 			content: {
 				type: String
 			}
-		}
+		}]
 	},
 	{ timestamps: true }
 );
