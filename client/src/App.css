@@ -1,38 +1,150 @@
-.App {
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+background-image: url("https://images.pexels.com/photos/11886242/pexels-photo-11886242.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+background-size: cover;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+p {
+font-family: 'Oxygen', sans-serif;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Navigation Bar */
+
+.nav-bar{
+display: flex;
+justify-content: space-between;
+padding: 10px 30px 10px 30px;
+background-color: #0158B5;
+}
+
+.nav-center {
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.logo {
+font-family: 'Work Sans', sans-serif;
+font-weight: 400;
+font-style: italic;
+color: #F6CE00;
+}
+
+.dropbtn {
+display: flex;
+border: none;
+transition: 5s ease-in-out;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: rgb(67,67,191);
+  border-top: 20px solid rgb(58,188,248);
+  border-left: 20px solid rgb(58,188,248);
+  min-width: 500px;
+  min-height: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  right: 0;
+  top: 10px;
+}
+
+.login-reg {
+  font-weight: bold;
+}
+
+.login-reg a {
+  background-color: rgb(255,132,5);
+}
+
+.dropdown-content .login-reg a:hover {
+  background-color: rgb(67,67,191);
+}
+
+.dropdown-content a {
+  color: #FAEBEFFF;
+  font-family: 'Oxygen', sans-serif;
+  font-size: 20px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  padding: 15px 15px;
+  text-decoration: none;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.dropdown-content a:hover {
+  transition: .5s ease-in-out;
+  background-color: rgb(255,132,5);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.dropdown:hover .dropdown-content {
+  display: block;
+  z-index: 1;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}
+
+/* Header */
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 30px;
+  align-items: center;
+  padding: 80px 450px 30px 175px;
+}
+
+.header-left {
+  background-color: white;
+  width: 350px;
+  height:350px;
+  border-radius: 50%;
+  box-shadow: 2px 2px 5px 1px rgb(0, 2, 50);
+  background-image: url("https://images.pexels.com/photos/6646871/pexels-photo-6646871.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+  background-size: cover;
+}
+
+.header-right{
+  background-color: #FAEBEFFF;
+  box-shadow: 2px 2px 5px 1px rgb(0, 2, 50);
+  padding: 40px;
+  border-radius: 5px;
+}
+
+.heading-text {
+  color: rgb(67,67,191);
+  font-family: 'Work Sans', sans-serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 28px;
+  text-align: center;
+  position: relative;
+  bottom: 25px;
+  right:45px;
+  background-color: #F6CE00;
+  box-shadow: 2px 2px 5px 1px rgb(0, 2, 50);
+  width: 300px;
+  padding: 15px;
+  transform: skew(-2deg);
+}
+
+.header-text {
+  color: rgb(45, 45, 148);
+  font-size: 19px;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 500;
+  width: 600px;
 }
