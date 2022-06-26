@@ -1,5 +1,4 @@
-{
-  "name": "Hackathon2022",
+{   "name": "Hackathon2022",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -21,4 +20,5 @@
     "mongoose": "^6.4.0",
     "react-router-dom": "^5.3.3"
   }
-}
+  }
+

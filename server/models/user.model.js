@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const bcrypt = require('bcrypt');
-
 const UserSchema = new mongoose.Schema(
 	{
 		firstName: {
@@ -14,25 +13,62 @@ const UserSchema = new mongoose.Schema(
 		email: {
 			type: String,
 			required: [true, "Email is required"],
-			validate: {
-				validator: val => /^([\w-\.]+@([\w-]+\.)+[\w-]+)?$/.test(val),
-				message: "Please enter a valid email"
-			}
+			validator: val => /^([\w-\.]+@([\w-]+\.)+[\w-]+)?$/.test(val),
+			message: "Please enter a valid email"
 		},
 		password: {
 			type: String,
 			required: [true, "Password is required"],
 			minlength: [8, "Password must be 8 characters or longer"]
-		},
-		post: [{
-			type: String,
+		}
+		,
+		post: [
+			{
 			title: {
-				type: String
+				type: String,
+				required: [true, 'title is required']
 			},
 			description: {
-				type: String
+				type: String,
+				required: [true, 'description is required']
 			}
-		}]
+		}
+	],
+		location:{
+			type:String,
+			required: [true, "location is required"]
+		},
+		food:{
+			type: Boolean
+		},
+		food_quanity:{
+			type: Number,
+		},
+		housing:{
+			type: Boolean
+		},
+		housing_quantity:{
+			type: Number
+		},
+		other:{
+			type: Boolean
+		},
+		other_quantity:{
+			type: Number
+		},
+		resourse_request:[
+			{
+				// requesting_User_id:{
+				// 	type: String
+				// },
+				comments:{
+					type: String
+				},
+				follow_request:{
+					type:Boolean
+				}
+			}
+		]
 	},
 	{ timestamps: true }
 );
