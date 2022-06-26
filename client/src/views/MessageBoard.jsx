@@ -20,17 +20,17 @@ const MessageBoard = () => {
                 </div>
 
                 <div>
-                    <label htmlFor="">Content</label>
+                    <label htmlFor="">Description</label>
                     <input type="text" />
                 </div>
 
                 <div>
-                    <label></label>
+                    <label htmlFor="">Location</label>
                     <input type="text" />
                 </div>
 
                 <div>
-                    <label></label>
+                    <label htmlFor=""></label>
                     <input type="text" />
                 </div>
 
