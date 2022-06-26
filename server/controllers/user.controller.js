@@ -1,4 +1,5 @@
 const User = require('../models/user.model');
+
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt")
 
@@ -122,62 +123,87 @@ class UserController {
                 console.log("err", err)
             });
     }
-    
+
+//**************USER POSTS*******************/
+    //CREATE A POST 
     createPost = (req,res) => 
-    User.updateOne({ _id: req.params._id }, { $push: { post: req.body } } ,{ runValidators: true })
-    .then(updatedUser => {
-        res.json({ user: updatedUser })
-        console.log("Added Post Successfully")
-    })
-    .catch(err => {
-        res.json({ message: "Something went wrong", err })
-        console.log(err, "err")
-    });
+        User.updateOne({ _id: req.params._id }, { $push: { userPosts: req.body } } ,{ runValidators: true })
+        .then(updatedUser => {
+            res.json({ user: updatedUser })
+            console.log("Added Post Successfully")
+        })
+        .catch(err => {
+            res.json({ message: "Something went wrong", err })
+            console.log(err, "err")
+        });
 
 //READ A SINGLE POST
-getPost = (req, res) => {
-        let postID = req.params._id
-        console.log(postID)
-        User.findOne({ "post._id": postID })
-            .then(result => {
-                console.log(result)
-                console.log(result.post.find(post => post._id == postID))
-                res.json(result.post.find(post => post._id == postID))
-            })
-            .catch(err => {
-                res.status(400).json({ message: "Something went wrong", err })
-                console.log(err)
-            });
-    }
+    getPost = (req, res) => {
+            let userPostsID = req.params._id
+            console.log(userPostsID)
+            User.findOne({ "userPosts._id": userPostsID })
+                .then(result => {
+                    console.log(result)
+                    console.log(result.userPosts.find(userPosts => userPosts._id == userPostsID))
+                    res.json(result.userPosts.find(userPosts => userPosts._id == userPostsID))
+                })
+                .catch(err => {
+                    res.status(400).json({ message: "Something went wrong", err })
+                    console.log(err)
+                });
+        }
 
 //DELETE A POST
 
 deletePost = (req, res) => {
-User.updateOne({ 'post._id': req.params._id }, { $pull: { post: { _id: req.params._id } } }, { runValidators: true })
-    .then(updatedUser => {
-        // console.log(req)
-        res.json({ updatedUser })
-        console.log("updated user successfully", console.log(updatedUser))
-    })
-    .catch(err => {
-        res.json({ message: "Something went wrong", err })
-        console.log(err, "err")
-    });
+    User.updateOne({ 'userPosts._id': req.params._id }, { $pull: { userPosts: { _id: req.params._id } } }, { runValidators: true })
+        .then(updatedUser => {
+            // console.log(req)
+            res.json({ updatedUser })
+            console.log("updated user successfully", console.log(updatedUser))
+        })
+        .catch(err => {
+            res.json({ message: "Something went wrong", err })
+            console.log(err, "err")
+        });
 }
 
 //UPDATE A USER POST
 updatePost= (req, res) => {
-User.updateOne({ 'post._id': req.params._id }, { $set: { 'post.$.title': req.body.title, 'post.$.content': req.body.content } }, { runValidators: true })
-    .then(updatedUser => {
-        // console.log(req)
-        res.json({ updatedUser })
-        console.log("updated user successfully", console.log(updatedUser))
-    })
-    .catch(err => {
-        res.json({ message: "Something went wrong", err })
-        console.log(err, "err")
-    });
+    User.updateOne({ 'userPosts._id': req.params._id }, 
+    { $set: { 
+        'userPosts.$.title': req.body.title, 
+        'userPosts.$.description': req.body.description, 
+        'userPosts.$.location': req.body.location,  
+        'userPosts.$.food_quanity': req.body.food_quanity,
+        'userPosts.$.housing_quantity': req.body.housing_quantity,
+        'userPosts.$.otherName': req.body.otherName,
+        'userPosts.$.otherQuantity': req.body.otherQuantity,} 
+    }, { runValidators: true })
+
+        .then(updatedUser => {
+            // console.log(req)
+            res.json({ updatedUser })
+            console.log("updated user successfully", console.log(updatedUser))
+        })
+        .catch(err => {
+            res.json({ message: "Something went wrong", err })
+            console.log(err, "err")
+        });
 }
+
+//**************USER FOLLOWERS*******************/
+        //ADD FOLLOWER
+        addFollower = (req,res) => 
+        User.updateOne({ _id: req.params._id }, { $push: { followers: req.body } } ,{ runValidators: true })
+        .then(updatedUser => {
+            res.json({ user: updatedUser })
+            console.log("Added Follower Successfully")
+        })
+        .catch(err => {
+            res.json({ message: "Something went wrong", err })
+            console.log(err, "err")
+        });
 }
 
 module.exports = new UserController();

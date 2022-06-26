@@ -4,6 +4,7 @@ import menu from "../styles/icons8-menu-80.png"
 import school from "../styles/icons8-school-64.png"
 import food from "../styles/icons8-foods-64.png"
 import house from "../styles/icons8-house-64.png"
+import { Link } from 'react-router-dom'
 
 const Dashboard = () => {
 
@@ -31,6 +32,11 @@ const Dashboard = () => {
                         <a href="#">Login</a>
                         <a href="#">Register</a>
                     </div>
+                    {/* Link to Post (Pass id of user in session) */}
+                    <div>
+                        Create a Post:
+                        {/* <Link to={`/users/messageboard/${_id}`}>MessageBoard</Link> */}
+                    </div>
                 </div>
             </div>
         </div>
@@ -49,9 +55,9 @@ const Dashboard = () => {
                 <img src={house} alt="house icon"/>
             </div>
         </div>
-      </body>
+    </body>
     </div>
-  )
+)
 }
 
 export default Dashboard

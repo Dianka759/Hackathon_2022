@@ -12,29 +12,7 @@ const MessageBoard = () => {
     return (
         <div>
 
-            <form action="">
-
-                <div>
-                    <label htmlFor="">Title</label>
-                    <input type="text" />
-                </div>
-
-                <div>
-                    <label htmlFor="">Description</label>
-                    <input type="text" />
-                </div>
-
-                <div>
-                    <label htmlFor="">Location</label>
-                    <input type="text" />
-                </div>
-
-                <div>
-                    <label htmlFor=""></label>
-                    <input type="text" />
-                </div>
-
-            </form>
+            <app_form />
 
         </div>
     )

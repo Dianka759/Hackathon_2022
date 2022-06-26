@@ -1,5 +1,62 @@
 const mongoose = require("mongoose");
 const bcrypt = require('bcrypt');
+
+const FollowerSchema = new mongoose.Schema(
+	{
+		followerID:{
+			type: String
+			}
+	},
+	{ timestamps: true }
+);
+
+const RequestSchema = new mongoose.Schema(
+	{
+		comments:{
+			type: String
+			},
+		follow_request:{
+			type:Boolean,
+			default: false
+			}
+	},
+	{ timestamps: true }
+);
+
+const ResourceSchema = new mongoose.Schema(
+	{
+		title: {
+			type: String,
+			required: [true, 'title is required']
+		},
+		description: {
+			type: String,
+			required: [true, 'description is required']
+		}
+		,
+		location:{
+			type:String,
+			required: [true, "location is required"]
+		},
+		food_quanity:{
+			type: Number
+		}
+		,
+		housing_quantity:{
+			type: Number
+		},
+		otherName:{
+			type: String,
+			required: [true, "Other is required"],
+			minlength: [3, "Other must be 8 characters or longer"]
+		},
+		otherQuantity:{
+			type: Number
+		}
+	},
+	{ timestamps: true }
+)
+
 const UserSchema = new mongoose.Schema(
 	{
 		firstName: {
@@ -20,58 +77,14 @@ const UserSchema = new mongoose.Schema(
 			type: String,
 			required: [true, "Password is required"],
 			minlength: [8, "Password must be 8 characters or longer"]
-		}
-		,
-		post: [
-			{
-			title: {
-				type: String,
-				required: [true, 'title is required']
-			},
-			description: {
-				type: String,
-				required: [true, 'description is required']
-			}
-		}
-	],
-		location:{
-			type:String,
-			required: [true, "location is required"]
 		},
-		food:{
-			type: Boolean
-		},
-		food_quanity:{
-			type: Number,
-		},
-		housing:{
-			type: Boolean
-		},
-		housing_quantity:{
-			type: Number
-		},
-		other:{
-			type: Boolean
-		},
-		other_quantity:{
-			type: Number
-		},
-		resourse_request:[
-			{
-				// requesting_User_id:{
-				// 	type: String
-				// },
-				comments:{
-					type: String
-				},
-				follow_request:{
-					type:Boolean
-				}
-			}
-		]
+		followers:[FollowerSchema],
+		userPosts: [ResourceSchema],
+		resource_request: [RequestSchema]
 	},
 	{ timestamps: true }
 );
+
 
 UserSchema.virtual('confirmPassword')
     .get(() => this._confirmPassword)
