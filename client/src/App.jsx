@@ -3,16 +3,19 @@ import App_form from './components/App_form';
 import Food from './views/Food'
 import Housing from './views/Housing'
 import Other from './views/Other'
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Signupform from './views/Signupform'
 import LoginForm from './views/LoginForm'
 import Dashboard from './views/Dashboard'
-
 
 function App() {
     return (
         <div className='App'>
             <Switch>
+
+                <Route exact path="/">
+                    <Redirect to="/dashboard" />
+                </Route>
 
                 <Route exact path="/signinform">
                     <Signupform />

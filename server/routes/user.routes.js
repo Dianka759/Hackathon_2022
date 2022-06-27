@@ -10,18 +10,22 @@ module.exports = app => {
 
   app.delete("/api/users/delete/:_id", UserController.deleteAnExistingUser);
   app.patch("/api/users/update/:_id", UserController.updateExistingUser);
-  
-//Create A POST 
+
+  //Create A POST 
   app.post("/api/users/createPost/:_id", UserController.createPost);
 
-//READ A POST OF A USER
-app.get("/api/users/getPost/:_id", UserController.getPost)
+  //READ A POST OF A USER
+  app.get("/api/users/getPost/:_id", UserController.getPost)
 
-//Update a Post
-app.put("/api/users/updatePost/:_id", UserController.updatePost)
+  // Get all posts
+  app.get("/api/users/getAllPosts", UserController.getAllPosts)
 
-//DELETE A POST 
-  app.put("/api/users/deletePost/:_id", UserController.deletePost)
+  //Update a Post
+  app.patch("/api/users/updatePost/:_id", UserController.updatePost)
 
-  
+  //DELETE A POST 
+  app.delete("/api/users/deletePost/:_id", UserController.deletePost)
+
+  //ADD A FOLLOWER
+  app.patch("/api/users/addFollower/:_id", UserController.addFollower);
 }

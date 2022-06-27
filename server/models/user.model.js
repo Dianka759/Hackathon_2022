@@ -3,22 +3,22 @@ const bcrypt = require('bcrypt');
 
 const FollowerSchema = new mongoose.Schema(
 	{
-		followerID:{
+		followerID: {
 			type: String
-			}
+		}
 	},
 	{ timestamps: true }
 );
 
 const RequestSchema = new mongoose.Schema(
 	{
-		comments:{
+		comments: {
 			type: String
-			},
-		follow_request:{
-			type:Boolean,
+		},
+		follow_request: {
+			type: Boolean,
 			default: false
-			}
+		}
 	},
 	{ timestamps: true }
 );
@@ -34,23 +34,23 @@ const ResourceSchema = new mongoose.Schema(
 			required: [true, 'description is required']
 		}
 		,
-		location:{
-			type:String,
+		location: {
+			type: String,
 			required: [true, "location is required"]
 		},
-		food_quanity:{
+		food_quanity: {
 			type: Number
 		}
 		,
-		housing_quantity:{
+		housing_quantity: {
 			type: Number
 		},
-		otherName:{
+		otherName: {
 			type: String,
-			required: [true, "Other is required"],
-			minlength: [3, "Other must be 8 characters or longer"]
+			// required: [true, "Name is required"],
+			minlength: [3, "Name must be 8 characters or longer"]
 		},
-		otherQuantity:{
+		otherQuantity: {
 			type: Number
 		}
 	},
@@ -78,7 +78,7 @@ const UserSchema = new mongoose.Schema(
 			required: [true, "Password is required"],
 			minlength: [8, "Password must be 8 characters or longer"]
 		},
-		followers:[FollowerSchema],
+		followers: [FollowerSchema],
 		userPosts: [ResourceSchema],
 		resource_request: [RequestSchema]
 	},
@@ -87,24 +87,24 @@ const UserSchema = new mongoose.Schema(
 
 
 UserSchema.virtual('confirmPassword')
-    .get(() => this._confirmPassword)
-    .set(value => this._confirmPassword = value);//Creats a virtual field called confirmPassword that is used to validate the password matches confirm --> Getter and setter are creating temporary fields for cP
+	.get(() => this._confirmPassword)
+	.set(value => this._confirmPassword = value);//Creats a virtual field called confirmPassword that is used to validate the password matches confirm --> Getter and setter are creating temporary fields for cP
 
 //pre is saving the user to db, validate the user object password matches. if they dont match, this.invalidate() will creata a valid error message
 UserSchema.pre('validate', function (next) {
-    if (this.password !== this.confirmPassword) {
-        this.invalidate('confirmPassword', 'Password must match confirm password');
-    }
-    next();//after this is done go to the next step
+	if (this.password !== this.confirmPassword) {
+		this.invalidate('confirmPassword', 'Password must match confirm password');
+	}
+	next();//after this is done go to the next step
 });
 
 //Hashes password before saving it to the db
 UserSchema.pre('save', function (next) {
-    bcrypt.hash(this.password, 10)
-        .then(hash => {
-            this.password = hash;
-            next();
-        });
+	bcrypt.hash(this.password, 10)
+		.then(hash => {
+			this.password = hash;
+			next();
+		});
 });
 
 
