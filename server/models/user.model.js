@@ -1,14 +1,14 @@
 const mongoose = require("mongoose");
 const bcrypt = require('bcrypt');
 
-const FollowerSchema = new mongoose.Schema(
-	{
-		followerID: {
-			type: String
-		}
-	},
-	{ timestamps: true }
-);
+// const FollowerSchema = new mongoose.Schema(
+// 	{
+// 		userID: {
+// 			type: String
+// 		}
+// 	},
+// 	{ timestamps: true }
+// );
 
 const RequestSchema = new mongoose.Schema(
 	{
@@ -25,6 +25,9 @@ const RequestSchema = new mongoose.Schema(
 
 const ResourceSchema = new mongoose.Schema(
 	{
+		userID: {
+			type: String
+		},
 		title: {
 			type: String,
 			required: [true, 'title is required']
@@ -78,7 +81,10 @@ const UserSchema = new mongoose.Schema(
 			required: [true, "Password is required"],
 			minlength: [8, "Password must be 8 characters or longer"]
 		},
-		followers: [FollowerSchema],
+		// followers: [FollowerSchema],
+		followers: {
+			type: Array,
+		},
 		userPosts: [ResourceSchema],
 		resource_request: [RequestSchema]
 	},
@@ -88,9 +94,10 @@ const UserSchema = new mongoose.Schema(
 
 UserSchema.virtual('confirmPassword')
 	.get(() => this._confirmPassword)
-	.set(value => this._confirmPassword = value);//Creats a virtual field called confirmPassword that is used to validate the password matches confirm --> Getter and setter are creating temporary fields for cP
+	.set(value => this._confirmPassword = value);
+//Creates a virtual field called confirmPassword that is used to validate the password matches confirm --> Getter and setter are creating temporary fields for cP
 
-//pre is saving the user to db, validate the user object password matches. if they dont match, this.invalidate() will creata a valid error message
+//pre is saving the user to db, validate the user object password matches. if they dont match, this.invalidate() will create a valid error message
 UserSchema.pre('validate', function (next) {
 	if (this.password !== this.confirmPassword) {
 		this.invalidate('confirmPassword', 'Password must match confirm password');

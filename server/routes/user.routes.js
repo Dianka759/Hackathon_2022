@@ -5,8 +5,10 @@ module.exports = app => {
   app.get("/api/users", authenticate, UserController.getAllUsers)
   app.post("/api/users/register", UserController.registerUser)
   app.post("/api/users/login", UserController.login)
-  app.get("/api/users/getloggedinuser", UserController.getLoggedInUser)
+  app.get("/api/users/getLoggedInUser", UserController.getLoggedInUser)
   app.get("/api/users/logout", UserController.logout)
+
+  app.get("/api/users/getUserById/:_id", UserController.getUserById)
 
   app.delete("/api/users/delete/:_id", UserController.deleteAnExistingUser);
   app.patch("/api/users/update/:_id", UserController.updateExistingUser);
@@ -27,5 +29,6 @@ module.exports = app => {
   app.delete("/api/users/deletePost/:_id", UserController.deletePost)
 
   //ADD A FOLLOWER
-  app.patch("/api/users/addFollower/:_id", UserController.addFollower);
+  app.put("/api/users/addFollower/:_id/:_loggedInUser", UserController.addFollower);
+
 }

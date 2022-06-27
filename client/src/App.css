@@ -48,7 +48,18 @@ transition: 5s ease-in-out;
 
 .dropdown {
   position: relative;
-  display: inline-block;
+
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  font-size: small;
 }
 
 .dropdown-content {

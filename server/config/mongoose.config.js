@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://localhost/hackathon_2022", {
+const wintersdebug = '127.0.0.1'
+
+mongoose.connect("mongodb://" + wintersdebug + "/hackathon_2022", {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 })

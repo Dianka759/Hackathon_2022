@@ -207,9 +207,14 @@ class UserController {
     //**************USER FOLLOWERS*******************/
     //ADD FOLLOWER
     addFollower = (req, res) =>
-        User.updateOne({ _id: req.params._id }, { $push: { followers: req.body } }, { runValidators: true })
+        User.updateOne(
+            { _id: req.params._id },
+            { $push: { followers : req.params._loggedInUser }},
+            { runValidators: true })
+
             .then(updatedUser => {
-                res.json({  updatedUser })
+                console.log(updatedUser)
+                res.json(updatedUser)
                 console.log("Added Follower Successfully")
             })
             .catch(err => {
@@ -217,6 +222,18 @@ class UserController {
                 console.log(err, "err")
             });
 
+    ///GET USER BY ID
+    getUserById = (req, res) => {
+        User.findOne({ _id: req.params._id })
+            .then(result => {
+                console.log(result)
+                res.json(result)
+            })
+            .catch(err => {
+                res.status(400).json({ message: "Something went wrong", err })
+                console.log(err)
+            });
+    }
 }
 
 module.exports = new UserController();

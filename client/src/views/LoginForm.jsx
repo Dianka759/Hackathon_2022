@@ -25,10 +25,11 @@ const LoginForm = (props) => {
         })
     }
 
+
     const handleLogin = (e) => {
         // validate then axios call to submit.
         e.preventDefault()
-        axios.post("http://localhost:8000/api/users/login", tempLogin, {withCredentials: true})
+        axios.post("http://localhost:8000/api/users/login", tempLogin, { withCredentials: true })
             .then(res => {
                 console.log("response when logging in", res)
                 if (res.data.error) {
@@ -37,15 +38,17 @@ const LoginForm = (props) => {
                     // props.setIsLoginAttempt(true);
                     // setUser(res.data)
 
-                    axios.get("http://localhost:8000/api/users/getLoggedInUser", {withCredentials: true})
+                    axios.get("http://localhost:8000/api/users/getLoggedInUser", { withCredentials: true })
                         .then(res => {
                             if (res.data.results) {
-                                // setUser(res.data.results);
+                                sessionStorage.setItem("user", JSON.stringify(res.data.results))
+                                // console.log(sessionStorage.getItem("user"))
+                                sessionStorage.getItem("user")
                             }
                         })
                         .catch(err => console.log("Error checking userToken in LoginForm", err))
                 }
-                
+
             })
             .catch(err => console.log("get account error", err))
     }
@@ -54,8 +57,8 @@ const LoginForm = (props) => {
         <div className="form-group">
             <form onSubmit={handleLogin}>
                 <p className="text-danger">{loginErrors?.error}</p>
-                <input type="text" name="userEmail" className="form-control" id="userEmail" placeholder="Email: someone@somewhere.com" onChange={ (e) => onChangeHandler(e) } />
-                <input type="password" name="userPassword" className="form-control" id="userPassword" placeholder="Password" onChange={ (e) => onChangeHandler(e) } />
+                <input type="text" name="email" className="form-control" id="email" placeholder="Email: someone@somewhere.com" onChange={(e) => onChangeHandler(e)} />
+                <input type="password" name="password" className="form-control" id="password" placeholder="Password" onChange={(e) => onChangeHandler(e)} />
 
                 <Button type="submit" variant="primary" >Log In</Button>
             </form>
@@ -71,10 +74,10 @@ const LoginForm = (props) => {
             <Modal show={show} onHide={handleClose} backdrop="static" centered>
                 <ModalHeader closeButton>
                     <ModalTitle>Sign Up<h5>It's quick and easy.</h5></ModalTitle>
-                    
+
                 </ModalHeader>
                 <ModalBody>
-                    <SignupForm handleClose={handleClose} setIsLoginAttempt={props.setIsLoginAttempt}/>
+                    <SignupForm handleClose={handleClose} setIsLoginAttempt={props.setIsLoginAttempt} />
                 </ModalBody>
             </Modal>
 

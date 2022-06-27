@@ -7,8 +7,13 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Signupform from './views/Signupform'
 import LoginForm from './views/LoginForm'
 import Dashboard from './views/Dashboard'
+import AddFollower from './components/AddFollower'
+
+import { useState } from 'react';
+
 
 function App() {
+
     return (
         <div className='App'>
             <Switch>
@@ -45,8 +50,11 @@ function App() {
                     <Other />
                 </Route>
 
-            </Switch>
+                <Route exact path="/addFollower/:_id">
+                    <AddFollower />
+                </Route>
 
+            </Switch>
         </div>
     );
 }

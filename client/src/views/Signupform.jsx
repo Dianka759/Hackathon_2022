@@ -9,7 +9,8 @@ const SignupForm = (props) => {
     const [userForm, setUserForm] = useState({
         firstName: "",
         lastName: "",
-        userPassword: ""
+        email:"",
+        password: ""
     });
 
     // const { user, setUser } = useContext(UserContext);
@@ -34,10 +35,11 @@ const SignupForm = (props) => {
     const submitForm = (e) => {
         e.preventDefault();
         //validate form, submit to DB, redirect
-        userForm.firstName.length >=1 && userForm.lastName.length >= 1 && userForm.userPassword.length >= 3
+        userForm.firstName.length >=1 && userForm.lastName.length >= 1 && userForm.password.length >= 3
             ? axios.post("http://localhost:8000/api/users/register", userForm, {withCredentials: true})
                 // .then(res => history.push("/"))
                 .then(res => { 
+                    console.log(userForm)
                     console.log("registration response: ", res)
                     if (res.data.errors) {
                         setFormErrors(res.data.errors)
@@ -80,8 +82,8 @@ const SignupForm = (props) => {
                             ? <p style={{ color: "red" }}>{emailError}</p>
                             : null
                     }
-                    <input type="text" name="userEmail" className="form-control" onChange={ (e) => {onChangeHandler(e); e.target.value.length < 5 ? setEmailError("Email must have at least 5 characters") : setEmailError("");} } id="userEmail" placeholder="Email (e.g. 'Someone@somewhere.com')" />
-                    <p className="text-danger">{formErrors.userEmail?.message || formErrors.matchingEmail?.message}</p>
+                    <input type="text" name="email" className="form-control" onChange={ (e) => {onChangeHandler(e); e.target.value.length < 5 ? setEmailError("Email must have at least 5 characters") : setEmailError("");} } id="userEmail" placeholder="Email (e.g. 'Someone@somewhere.com')" />
+                    <p className="text-danger">{formErrors.email?.message || formErrors.matchingEmail?.message}</p>
                 </div>
 
                 <div className="form-group">
@@ -90,8 +92,8 @@ const SignupForm = (props) => {
                             ? <p style={{ color: "red" }}>{passwordError}</p>
                             : null
                     }
-                    <input type="password" name="userPassword" className="form-control" onChange={ (e) => {onChangeHandler(e); e.target.value.length < 5 ? setPasswordError("Password must be at least 5 characters") : setPasswordError("");}} id="userPassword" placeholder="New Password" />
-                    <p className="text-danger">{formErrors.userPassword?.message}</p>
+                    <input type="password" name="password" className="form-control" onChange={ (e) => {onChangeHandler(e); e.target.value.length < 5 ? setPasswordError("Password must be at least 5 characters") : setPasswordError("");}} id="password" placeholder="New Password" />
+                    <p className="text-danger">{formErrors.password?.message}</p>
                 </div>
 
                 <div className="form-group">
@@ -100,7 +102,7 @@ const SignupForm = (props) => {
                             ? <p style={{ color: "red" }}>{confirmPasswordError}</p>
                             : null
                     }
-                    <input type="password" name="confirmPassword" className="form-control" onChange={ (e) => {onChangeHandler(e); e.target.value !== userForm.userPassword ? setConfirmPasswordError("Passwords must match.") : setConfirmPasswordError("");} } id="confirmPassword" placeholder="Confirm Password" />
+                    <input type="password" name="confirmPassword" className="form-control" onChange={ (e) => {onChangeHandler(e); e.target.value !== userForm.password ? setConfirmPasswordError("Passwords must match.") : setConfirmPasswordError("");} } id="confirmPassword" placeholder="Confirm Password" />
                     <p className="text-danger">{formErrors.confirmPassword?.message}</p>
                 </div>
                 <Button variant="secondary mt-2" onClick={props.handleClose}>Close</Button>
