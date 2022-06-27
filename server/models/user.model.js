@@ -1,6 +1,62 @@
 const mongoose = require("mongoose");
 const bcrypt = require('bcrypt');
 
+const FollowerSchema = new mongoose.Schema(
+	{
+		followerID:{
+			type: String
+			}
+	},
+	{ timestamps: true }
+);
+
+const RequestSchema = new mongoose.Schema(
+	{
+		comments:{
+			type: String
+			},
+		follow_request:{
+			type:Boolean,
+			default: false
+			}
+	},
+	{ timestamps: true }
+);
+
+const ResourceSchema = new mongoose.Schema(
+	{
+		title: {
+			type: String,
+			required: [true, 'title is required']
+		},
+		description: {
+			type: String,
+			required: [true, 'description is required']
+		}
+		,
+		location:{
+			type:String,
+			required: [true, "location is required"]
+		},
+		food_quanity:{
+			type: Number
+		}
+		,
+		housing_quantity:{
+			type: Number
+		},
+		otherName:{
+			type: String,
+			required: [true, "Other is required"],
+			minlength: [3, "Other must be 8 characters or longer"]
+		},
+		otherQuantity:{
+			type: Number
+		}
+	},
+	{ timestamps: true }
+)
+
 const UserSchema = new mongoose.Schema(
 	{
 		firstName: {
@@ -14,28 +70,21 @@ const UserSchema = new mongoose.Schema(
 		email: {
 			type: String,
 			required: [true, "Email is required"],
-			validate: {
-				validator: val => /^([\w-\.]+@([\w-]+\.)+[\w-]+)?$/.test(val),
-				message: "Please enter a valid email"
-			}
+			validator: val => /^([\w-\.]+@([\w-]+\.)+[\w-]+)?$/.test(val),
+			message: "Please enter a valid email"
 		},
 		password: {
 			type: String,
 			required: [true, "Password is required"],
 			minlength: [8, "Password must be 8 characters or longer"]
 		},
-		post: [{
-			type: String,
-			title: {
-				type: String
-			},
-			description: {
-				type: String
-			}
-		}]
+		followers:[FollowerSchema],
+		userPosts: [ResourceSchema],
+		resource_request: [RequestSchema]
 	},
 	{ timestamps: true }
 );
+
 
 UserSchema.virtual('confirmPassword')
     .get(() => this._confirmPassword)
