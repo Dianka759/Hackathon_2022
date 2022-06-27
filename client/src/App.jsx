@@ -1,5 +1,5 @@
 import './App.css';
-import App_form from './components/App_form';
+import PostForm from './components/PostForm';
 import Food from './views/Food'
 import Housing from './views/Housing'
 import Other from './views/Other'
@@ -34,8 +34,8 @@ function App() {
                     <Dashboard />
                 </Route>
 
-                <Route exact path="/App_form">
-                    <App_form />
+                <Route exact path="/PostForm">
+                    <PostForm />
                 </Route>
 
                 <Route exact path="/food">

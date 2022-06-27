@@ -29,8 +29,8 @@ const Dashboard = () => {
                                 <a href="#">Housing</a>
                                 <a href="#">Food Suppliers</a>
                                 <div class="login-reg">
-                                    <a href="#">Login</a>
-                                    <a href="#">Register</a>
+                                <Link to={"/loginForm"}>Login</Link>
+                                <Link to={"/signinform"}>Register</Link>
                                 </div>
                                 {/* Link to Post (Pass id of user in session) */}
                                 <div>

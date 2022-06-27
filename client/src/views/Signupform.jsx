@@ -13,8 +13,6 @@ const SignupForm = (props) => {
         password: ""
     });
 
-    // const { user, setUser } = useContext(UserContext);
-
     // front-end "validations" errors... trying to catch before user submits bad data to backend.
     const [firstNameError, setFirstNameError] = useState("");
     const [lastNameError, setLastNameError] = useState("");
@@ -44,6 +42,7 @@ const SignupForm = (props) => {
                     if (res.data.errors) {
                         setFormErrors(res.data.errors)
                     } else {
+                        history.push("/dashboard")
                         // redirect to main content.
                         // props.setIsLoginAttempt(true);
                         // setUser(res.data.user)

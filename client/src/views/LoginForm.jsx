@@ -35,15 +35,13 @@ const LoginForm = (props) => {
                 if (res.data.error) {
                     setLoginErrors(res.data)
                 } else {
-                    // props.setIsLoginAttempt(true);
-                    // setUser(res.data)
-
                     axios.get("http://localhost:8000/api/users/getLoggedInUser", { withCredentials: true })
                         .then(res => {
                             if (res.data.results) {
                                 sessionStorage.setItem("user", JSON.stringify(res.data.results))
                                 // console.log(sessionStorage.getItem("user"))
                                 sessionStorage.getItem("user")
+                                history.push("/dashboard")
                             }
                         })
                         .catch(err => console.log("Error checking userToken in LoginForm", err))
@@ -59,14 +57,10 @@ const LoginForm = (props) => {
                 <p className="text-danger">{loginErrors?.error}</p>
                 <input type="text" name="email" className="form-control" id="email" placeholder="Email: someone@somewhere.com" onChange={(e) => onChangeHandler(e)} />
                 <input type="password" name="password" className="form-control" id="password" placeholder="Password" onChange={(e) => onChangeHandler(e)} />
-
                 <Button type="submit" variant="primary" >Log In</Button>
             </form>
-
             <a href="#">Forgot password?</a>
-
             <hr />
-
             <Button variant="success" onClick={handleShow}>Create New Account</Button>
 
 
