@@ -46,65 +46,67 @@ const PostForm = (props) => {
 
     return (
         <div>
-            <div class="background-image">
-                <h1>Create New Post</h1>
-                {/* *************** FORM START *************** */}
-                <form className="mt-5 w-50 mx-auto" onSubmit={onSubmitHandler}>
+            <div className="background-image">
+                <div style={{ textAlign: 'center' }}>
+                    {/* *************** FORM START *************** */}
+                    <h1 style={{ paddingTop: "20px" }}>Provide a Resource</h1>
+                    <form className="container" onSubmit={onSubmitHandler}>
 
-                    <div className="form-group">
-                        <label> Title </label>
-                        <input type="text" name="title" className="form-control" placeholder="title" onChange={onChangeHandler} />
-                        <span className="alert-danger"> {errors.title && errors.title.message}</span>
-                    </div>
-                    <div className="form-group"  >
-                        <label> Description </label>
-                        <input type="text" name="description" className="form-control" placeholder="description" onChange={onChangeHandler} />
-                        <span className="alert-danger"> {errors.description && errors.description.message}</span>
-                    </div>
+                        <div className="form-group mb-2">
+                            <label> Title </label> <br />
+                            <input type="text" name="title" className="form-control" placeholder="title" onChange={onChangeHandler} />
+                            <span style={{ color: "red" }}> {errors.title && errors.title.message}</span>
+                        </div>
+                        <div className="form-group mb-2">
+                            <label> Description </label><br />
+                            <input type="text" name="description" className="form-control" placeholder="description" onChange={onChangeHandler} />
+                            <span style={{ color: "red" }}> {errors.description && errors.description.message}</span>
+                        </div>
 
-                    <label> Categories </label>
-                    <select name="categories" className="form-select mb-2" onChange={onChangeHandler} >
-                        {
-                            categories.map((category, i) => {
-                                return <option value={category} key={i}> {category} </option>
-                            })
-                        }
-                    </select>
-                    <span className="alert-danger"> {errors.categories && errors.categories.message}</span>
+                        <label> Categories </label> <br />
+                        <select name="categories" className="form-select mb-2" onChange={onChangeHandler} >
+                            {
+                                categories.map((category, i) => {
+                                    return <option value={category} key={i}> {category} </option>
+                                })
+                            }
+                        </select>
+                        <span style={{ color: "red" }}> {errors.categories && errors.categories.message}</span><br />
 
-                    <label>Location </label>
-                    <div className="form-group mb-2" onChange={onChangeHandler}>
-                        <input type="text" name="location" className="form-control" placeholder="location" />
-                    </div>
-                    <span className="alert-danger"> {errors.platform && errors.platform.message}</span>
+                        <label>Location </label> <br />
+                        <div className="form-group mb-2" onChange={onChangeHandler}>
+                            <input type="text" name="location" className="form-control" placeholder="location" />
+                        </div>
+                        <span style={{ color: "red" }}> {errors.platform && errors.platform.message}</span>
 
-                    <label>Food Quantity </label>
-                    <div className="form-group mb-2" onChange={onChangeHandler}>
-                        <input type="number" name="food_quantity" className="form-control" placeholder="food_quantity" />
-                    </div>
-                    <span className="alert-danger"> {errors.food_quantity && errors.food_quantity.message}</span>
+                        <label>Food Quantity </label><br />
+                        <div className="form-group mb-2" onChange={onChangeHandler}>
+                            <input type="number" name="food_quantity" className="form-control" placeholder="food_quantity" />
+                        </div>
+                        <span style={{ color: "red" }}> {errors.food_quantity && errors.food_quantity.message}</span>
 
-                    <label>Housing Quantity </label>
-                    <div className="form-group mb-2" onChange={onChangeHandler}>
-                        <input type="number" name="housing_quantity" className="form-control" placeholder="housing_quantity" />
-                    </div>
-                    <span className="alert-danger"> {errors.housing_quantity && errors.housing_quantity.message}</span>
+                        <label>Housing Quantity </label><br />
+                        <div className="form-group mb-2" onChange={onChangeHandler}>
+                            <input type="number" name="housing_quantity" className="form-control" placeholder="housing_quantity" />
+                        </div>
+                        <span style={{ color: "red" }}> {errors.housing_quantity && errors.housing_quantity.message}</span>
 
-                    <label>Other Name</label>
-                    <div className="form-group mb-2" onChange={onChangeHandler}>
-                        <input type="text" name="otherName" className="form-control" placeholder="otherName" />
-                    </div>
-                    <span className="alert-danger"> {errors.otherName && errors.otherName.message}</span>
+                        <label>Other Name</label><br />
+                        <div className="form-group mb-2" onChange={onChangeHandler}>
+                            <input type="text" name="otherName" className="form-control" placeholder="otherName" />
+                        </div>
+                        <span style={{ color: "red" }}> {errors.otherName && errors.otherName.message}</span>
 
-                    <label>Other Quantity </label>
-                    <div className="form-group mb-2" onChange={onChangeHandler}>
-                        <input type="number" name="otherQuantity" className="form-control" placeholder="otherQuantity" />
-                    </div>
-                    <span className="alert-danger"> {errors.otherQuantity && errors.otherQuantity.message}</span>
-                    <input type="submit" className="btn btn-success" />
+                        <label>Other Quantity </label><br />
+                        <div className="form-group mb-2" onChange={onChangeHandler}>
+                            <input type="number" name="otherQuantity" className="form-control" placeholder="otherQuantity" />
+                        </div>
+                        <span style={{ color: "red" }}> {errors.otherQuantity && errors.otherQuantity.message}</span>
+                        <input type="submit" className="btn btn-success" />
 
-                </form>
-                {/* *************** FORM END *************** */}
+                    </form>
+                    {/* *************** FORM END *************** */}
+                </div>
             </div>
         </div>
     )

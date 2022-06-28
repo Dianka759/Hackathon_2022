@@ -1,13 +1,45 @@
-import React from 'react'
+import React, { useState } from 'react'
 import school from "../styles/icons8-school-64.png"
 import food from "../styles/icons8-foods-64.png"
 import house from "../styles/icons8-house-64.png"
+import axios from 'axios'
+
 
 const Dashboard = () => {
 
-    // Get All Axios Call?
+    const [tempLogin, setTempLogin] = useState({});
+    const [loginErrors, setLoginErrors] = useState({});
 
-    // 
+
+    const onChangeHandler = (e) => {
+        setTempLogin({
+            ...tempLogin,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    const handleLogin = (e) => {
+        // validate then axios call to submit.
+        e.preventDefault()
+        axios.post("http://localhost:8000/api/users/login", tempLogin, { withCredentials: true })
+            .then(res => {
+                console.log("response when logging in", res)
+                if (res.data.error) {
+                    setLoginErrors(res.data)
+                } else {
+                    axios.get("http://localhost:8000/api/users/getLoggedInUser", { withCredentials: true })
+                        .then(res => {
+                            if (res.data.results) {
+                                sessionStorage.setItem("user", JSON.stringify(res.data.results))
+                                // console.log(sessionStorage.getItem("user"))
+                                sessionStorage.getItem("user")
+                            }
+                        })
+                        .catch(err => console.log("Error checking userToken in LoginForm", err))
+                }
+            })
+            .catch(err => console.log("get account error", err))
+    }
 
     return (
         <div>
@@ -126,25 +158,27 @@ const Dashboard = () => {
                     </div>
 
                 </div>
-                <div class="register-back">
-                    <div class="background-form">
-                        <div class="front-form">
-                            <input type="text" placeholder="Email" />
-                            <input type="text" placeholder="Password" />
-                            <button>Log in</button>
+                <div className="register-back" id="login">
+                    <form onSubmit={handleLogin}>
+                        <div className="background-form">
+                            <div className="front-form">
+                                <input type="text" placeholder="Email" />
+                                <input type="text" placeholder="Password" />
+                                <button type="submit">Log in</button>
+                            </div>
+                            <div className="signup">
+                                <h2>Don't have an account?</h2>
+                                <button>Sign up</button>
+                            </div>
                         </div>
-                        <div class="signup">
-                            <h2>Don't have an account?</h2>
-                            <button>Sign up</button>
-                        </div>
-                    </div>
-                    <div class="footer">
+                    </form>
+                    <div className="footer">
                         <p>Have a problem?</p>
                         <p>Contact us at: resourceukraine@gmail.com</p>
                     </div>
                 </div>
-            </body>
-        </div>
+            </body >
+        </div >
     )
 }
 

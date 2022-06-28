@@ -1,22 +1,13 @@
-import { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Button, Modal, ModalHeader, ModalTitle, ModalBody } from "react-bootstrap";
 import SignupForm from "./Signupform";
 import axios from "axios";
-// import { UserContext } from "./UserContext";
+import { useState } from "react";
 
 const LoginForm = (props) => {
     const history = useHistory();
     const [tempLogin, setTempLogin] = useState({});
     const [loginErrors, setLoginErrors] = useState({});
 
-    // testing useContext
-    // const { user, setUser } = useContext(UserContext);
-
-    // state for handling Modal component.
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
 
     const onChangeHandler = (e) => {
         setTempLogin({
@@ -46,36 +37,21 @@ const LoginForm = (props) => {
                         })
                         .catch(err => console.log("Error checking userToken in LoginForm", err))
                 }
-
             })
             .catch(err => console.log("get account error", err))
     }
 
     return (
-        <div className="form-group">
+        <div className="form-group background-image container" style={{ textAlign: "center" }}>
             <form onSubmit={handleLogin}>
-                <p className="text-danger">{loginErrors?.error}</p>
-                <input type="text" name="email" className="form-control" id="email" placeholder="Email: someone@somewhere.com" onChange={(e) => onChangeHandler(e)} />
-                <input type="password" name="password" className="form-control" id="password" placeholder="Password" onChange={(e) => onChangeHandler(e)} />
-                <Button type="submit" variant="primary" >Log In</Button>
-            </form>
-            <a href="#">Forgot password?</a>
-            <br />
-
-            <Button variant="success" onClick={handleShow}>Create New Account</Button>
-
-            {/* Modal Registration stuff */}
-            <Modal show={show} onHide={handleClose} backdrop="static" centered>
-                <ModalHeader closeButton>
-                    <ModalTitle>Sign Up<h5>It's quick and easy.</h5></ModalTitle>
-
-                </ModalHeader>
-                <ModalBody>
-                    <SignupForm handleClose={handleClose} setIsLoginAttempt={props.setIsLoginAttempt} />
-                </ModalBody>
-            </Modal>
-
-        </div>
+                <p style={{ color: "red" }}>{loginErrors?.error}</p>
+                <input type="text" name="email" className="form-control" id="email" placeholder="Email: someone@somewhere.com" onChange={(e) => onChangeHandler(e)} /> <br></br><br />
+                <input type="password" name="password" className="form-control" id="password" placeholder="Password" onChange={(e) => onChangeHandler(e)} /> <br></br> <br></br>
+                <button type="submit" variant="primary" >Log In</button>
+            </form> <br></br>
+            <p>Forgot password?</p>
+            <button onClick={() => { history.push("/signinform") }}>Create New Account</button>
+        </div >
     )
 }
 

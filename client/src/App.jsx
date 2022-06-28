@@ -1,8 +1,5 @@
 import './App.css';
 import PostForm from './components/PostForm';
-import Food from './views/Food'
-import Housing from './views/Housing'
-import Other from './views/Other'
 import { Switch, Route, Redirect, Link } from 'react-router-dom';
 import Signupform from './views/Signupform'
 import LoginForm from './views/LoginForm'
@@ -17,16 +14,16 @@ function App() {
 
     return (
         <div className='App'>
-            <div class="nav-bar">
-                <div class="nav-center">
-                    <h1 class="logo">ResourceUkraine</h1>
+            <div className="nav-bar">
+                <div className="nav-center">
+                    <Link to={"/dashboard"} id="link-style"><h1 className="logo">ResourceUkraine</h1></Link>
                     <img src={trust} alt="hand with heart" />
                 </div>
-                <div class="dropdown">
-                    <div class="dropbtn">
+                <div className="dropdown">
+                    <div className="dropbtn">
                         <img src={menu} alt="hamburger menu" />
                     </div>
-                    <div class="dropdown-content">
+                    <div className="dropdown-content">
                         <Link to={"/food"}>Food Suppliers</Link>
                         <Link to={"/housing"}>Housing</Link>
                         <Link to={"/other"}>Other</Link>
@@ -35,7 +32,7 @@ function App() {
                             <Link to={"/PostForm"}>Provide a Resource</Link>
                             {/* <Link to={`/users/messageboard/${_id}`}>MessageBoard</Link> */}
                         </div>
-                        <div class="login-reg">
+                        <div className="login-reg">
                             <Link to={"/loginForm"}>Login</Link>
                             <Link to={"/signinform"}>Register</Link>
                         </div>
@@ -69,11 +66,11 @@ function App() {
                 </Route>
 
                 <Route exact path="/housing">
-                    <Housing />
+                    <PostDisplay />
                 </Route>
 
                 <Route exact path="/other">
-                    <Other />
+                    <PostDisplay />
                 </Route>
 
                 <Route exact path="/addFollower/:_id">

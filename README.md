@@ -1,3 +1,3 @@
 # Hackathon 2022
 
-## cool project info herr.
+## During current social issues in Ukraine it is common to find sites that provide resources for specific issues such as access to housing, schooling and food. We wanted to focus on creating a platform where anyone looking for help or looking TO help can come together. In this project, we have created features such as a posting system for anyone with an account to offer up services in their intended categories as well as a request system for users to be approved for further information and contact with those offering resources.

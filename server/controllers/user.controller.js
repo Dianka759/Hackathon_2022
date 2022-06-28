@@ -238,7 +238,7 @@ class UserController {
     //Filter by Type
     getResourceByType = (req, res) => {
         User.find({ "categories": req.params.type })
-            .then(results => res.json({ results: results }))
+            .then(results => res.json(results))
             .catch(err => res.status(400).json({ message: "that didn't quite work.", err }));
     }
 

@@ -2,7 +2,7 @@ import React from 'react'
 
 const Other = () => {
   return (
-    <div>Other</div>
+    <div className="background-image">Other</div>
   )
 }
 
