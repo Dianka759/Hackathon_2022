@@ -31,4 +31,7 @@ module.exports = app => {
   //ADD A FOLLOWER
   app.put("/api/users/addFollower/:_id/:_loggedInUser", UserController.addFollower);
 
+  // FIND BY TYPE
+  app.get("/api/users/getResourceByType/:type", UserController.getResourceByType)
+
 }

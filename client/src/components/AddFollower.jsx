@@ -9,7 +9,7 @@ function AddFollower(props) {
     const [userID, setUserID] = useState("")
     const [userInfo, setUserInfo] = useState("")
     const [loaded, setLoaded] = useState(false)
-    
+
     const [followerName, setFollowerName] = useState("")
 
     useEffect(() => {
@@ -46,15 +46,17 @@ function AddFollower(props) {
 
     return (
         <div>
-            <h2> Logged in user: {user.firstName} </h2>
-            <h2> Post title: {postInfo.title} </h2>
-            <h3> posted by: {userInfo.firstName} </h3>
-            <h3>Followers: {loaded &&
-                userInfo.followers.map((follower, index) => {
-                    return <>{follower},                  </>
-                })}
-            </h3>
-            <button type="submit" onClick={() => addFollower(user)}> FOLLOW </button>
+            <div class="background-image">
+                <h2> Logged in user: {user.firstName} </h2>
+                <h2> Post title: {postInfo.title} </h2>
+                <h3> posted by: {userInfo.firstName} </h3>
+                <h3>Followers: {loaded &&
+                    userInfo.followers.map((follower, index) => {
+                        return <>{follower},                  </>
+                    })}
+                </h3>
+                <button type="submit" onClick={() => addFollower(user)}> FOLLOW </button>
+            </div>
         </div>
     )
 }

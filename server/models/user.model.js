@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 // 		userID: {
 // 			type: String
 // 		}
-// 	},
+// 	},	
 // 	{ timestamps: true }
 // );
 
@@ -25,6 +25,11 @@ const RequestSchema = new mongoose.Schema(
 
 const ResourceSchema = new mongoose.Schema(
 	{
+		categories: {
+			type: String,
+			enum: ["housing", "food", "other"],
+		}
+		,
 		userID: {
 			type: String
 		},

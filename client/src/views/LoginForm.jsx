@@ -60,9 +60,9 @@ const LoginForm = (props) => {
                 <Button type="submit" variant="primary" >Log In</Button>
             </form>
             <a href="#">Forgot password?</a>
-            <hr />
-            <Button variant="success" onClick={handleShow}>Create New Account</Button>
+            <br />
 
+            <Button variant="success" onClick={handleShow}>Create New Account</Button>
 
             {/* Modal Registration stuff */}
             <Modal show={show} onHide={handleClose} backdrop="static" centered>

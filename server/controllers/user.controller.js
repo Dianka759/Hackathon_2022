@@ -209,7 +209,7 @@ class UserController {
     addFollower = (req, res) =>
         User.updateOne(
             { _id: req.params._id },
-            { $push: { followers : req.params._loggedInUser }},
+            { $push: { followers: req.params._loggedInUser } },
             { runValidators: true })
 
             .then(updatedUser => {
@@ -234,6 +234,14 @@ class UserController {
                 console.log(err)
             });
     }
+
+    //Filter by Type
+    getResourceByType = (req, res) => {
+        User.find({ "categories": req.params.type })
+            .then(results => res.json({ results: results }))
+            .catch(err => res.status(400).json({ message: "that didn't quite work.", err }));
+    }
+
 }
 
 module.exports = new UserController();
