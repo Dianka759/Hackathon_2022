@@ -4,17 +4,13 @@ import { Link } from 'react-router-dom'
 
 const PostDisplay = (props) => {
 
-    const [state, setState] = useState([])
-    const [loaded, setLoaded] = useState(false)
-
-
+    const [state, setState] = useState([{ "test": "dumb" }])
 
     useEffect(() => {
         axios.get("http://localhost:8000/api/users/getResourceByType/food")
             .then(res => {
-                console.log(res.data.results);
-                setState(res.data.results);
-                setLoaded(true)
+                console.log(res.data);
+                setState(res.data);
             })
             .catch(err => console.log(err))
     }, [])
@@ -22,8 +18,8 @@ const PostDisplay = (props) => {
     return (
         <div>
             <div className="background-image">
-                {loaded &&
-                    state.map((value, i) => {
+                {
+                    state?.results?.map((value, i) => {
                         <div key={i}>
                             {value}
                         </div>
