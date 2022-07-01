@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 
-function AddFollower(props) {
+function ViewPost(props) {
     const { _id } = useParams()
     const user = JSON.parse(sessionStorage.getItem("user"))
     const [postInfo, setPostInfo] = useState("")
@@ -32,6 +32,7 @@ function AddFollower(props) {
         axios.put('http://localhost:8000/api/users/addFollower/' + userID + "/" + follower._id)
             .then(res => {
                 console.log(res.data)
+                window.location.reload()
             })
             .catch(err => console.error(err))
     }
@@ -49,16 +50,24 @@ function AddFollower(props) {
             <div class="background-image">
                 <h2> Logged in user: {user.firstName} </h2>
                 <h2> Post title: {postInfo.title} </h2>
+                <h2> Post Description: {postInfo.description} </h2>
                 <h3> posted by: {userInfo.firstName} </h3>
-                <h3>Followers: {loaded &&
+                <p>User Followers: {loaded &&
                     userInfo.followers.map((follower, index) => {
-                        return <>{follower},                  </>
+                        return <>{follower}, </>
                     })}
-                </h3>
-                <button type="submit" onClick={() => addFollower(user)}> FOLLOW </button>
+                </p>
+                {user._id !== postInfo.userID ?
+                    <>
+                        <button type="submit" onClick={() => addFollower(user)}> FOLLOW </button>
+                    </>
+                    : <>
+                        <button> Edit  </button> <button> Delete</button>
+                    </>
+                }
             </div>
         </div>
     )
 }
 
-export default AddFollower
+export default ViewPost

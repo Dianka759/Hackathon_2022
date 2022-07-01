@@ -116,16 +116,33 @@ const PostDisplay = (props) => {
                         </div>
                     </div>
                 </div>
-                {/* {
+                {
                     info?.map((value, i) => {
-                        <div key={i}>
-                            <h1>Category: {value.categories} </h1>
-                            <h1>Title: {value.title} </h1>
-                            <h1>Description: {value.description} </h1>
-                            <h1>Location: {value.location} </h1>
-                        </div>
+                        return <>
+                            <div key={i}>
+                                <h1>{value.userPosts?.map((post, i) => {
+                                    return <>
+                                        <p> {post.categories === category ?
+                                            <>
+                                                Title: {post.title}
+                                                <br />
+                                                Description: {post.description}
+                                                <br />
+                                                View Post: <Link to={`/viewPost/${post._id}`}>Click</Link>
+                                                <br /> <br />
+                                            </>
+                                            : !post.categories ?
+                                                <>
+                                                    <h1> No posts exist yet.</h1>
+                                                </> 
+                                        :   ""} </p>
+                                    </>
+                                })
+                                } </h1>
+                            </div>
+                        </>
                     })
-                } */}
+                }
             </div>
         </div>
     )

@@ -3,6 +3,7 @@ import school from "../styles/icons8-school-64.png"
 import food from "../styles/icons8-foods-64.png"
 import house from "../styles/icons8-house-64.png"
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 
 const Dashboard = () => {
@@ -33,6 +34,7 @@ const Dashboard = () => {
                                 sessionStorage.setItem("user", JSON.stringify(res.data.results))
                                 // console.log(sessionStorage.getItem("user"))
                                 sessionStorage.getItem("user")
+                                window.reload()
                             }
                         })
                         .catch(err => console.log("Error checking userToken in LoginForm", err))
@@ -162,13 +164,14 @@ const Dashboard = () => {
                     <form onSubmit={handleLogin}>
                         <div className="background-form">
                             <div className="front-form">
-                                <input type="text" placeholder="Email" />
-                                <input type="text" placeholder="Password" />
-                                <button type="submit">Log in</button>
+                            <p style={{ color: "red" }}>{loginErrors?.error}</p>
+                                <input type="text"name=" email" placeholder="Email" onChange={(e) => onChangeHandler(e)} />
+                                <input type="password" name="password" placeholder="Password" onChange={(e) => onChangeHandler(e)}/>
+                                <button type="submit" style={{cursor: "pointer"}}>Log in</button>
                             </div>
                             <div className="signup">
                                 <h2>Don't have an account?</h2>
-                                <button>Sign up</button>
+                                <Link to={"/signinform"}><button style={{cursor: "pointer"}}>Sign up</button></Link>
                             </div>
                         </div>
                     </form>

@@ -4,7 +4,7 @@ import { Switch, Route, Redirect, Link } from 'react-router-dom';
 import Signupform from './views/Signupform'
 import LoginForm from './views/LoginForm'
 import Dashboard from './views/Dashboard'
-import AddFollower from './components/AddFollower'
+import ViewPost from './components/ViewPost'
 import React from 'react'
 import trust from "./styles/icons8-trust-50.png"
 import menu from "./styles/icons8-menu-80.png"
@@ -61,20 +61,20 @@ function App() {
                     <PostForm />
                 </Route>
 
-                <Route exact path="/food">
+                <Route exact path="/:category">
                     <PostDisplay />
                 </Route>
 
-                <Route exact path="/housing">
+                {/* <Route exact path="/housing">
                     <PostDisplay />
                 </Route>
 
                 <Route exact path="/other">
                     <PostDisplay />
-                </Route>
+                </Route> */}
 
-                <Route exact path="/addFollower/:_id">
-                    <AddFollower />
+                <Route exact path="/viewPost/:_id">
+                    <ViewPost />
                 </Route>
 
                 <Route path="*" >
